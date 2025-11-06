@@ -6,7 +6,7 @@ django.setup()
 
 from db.models import Product
 
-# adding the products
+# Add products (reset each time)
 Product.objects.all().delete()
 Product.objects.create(upc="1001", name="Milk", price=2.99)
 Product.objects.create(upc="1002", name="Mango", price=1.99)
@@ -18,7 +18,6 @@ print("Available products:")
 for p in Product.objects.all():
     print(p.upc, p.name, p.price)
 
-# scanning the products
 while True:
     upc = input("Enter product UPC (or type 'done' to finish): ").strip()
     if upc.lower() == "done":
