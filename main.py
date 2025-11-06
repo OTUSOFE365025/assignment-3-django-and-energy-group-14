@@ -6,7 +6,7 @@ django.setup()
 
 from db.models import Product
 
-# Add products (reset each time)
+# adding all of the products we set already
 Product.objects.all().delete()
 Product.objects.create(upc="1001", name="Milk", price=2.99)
 Product.objects.create(upc="1002", name="Mango", price=1.99)
