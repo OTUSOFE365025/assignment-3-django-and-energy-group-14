@@ -1,32 +1,31 @@
-############################################################################
-## Django ORM Standalone Python Template
-############################################################################
-""" Here we'll import the parts of Django we need. It's recommended to leave
-these settings as is, and skip to START OF APPLICATION section below """
-
-# Turn off bytecode generation
-import sys
-sys.dont_write_bytecode = True
-
-# Import settings
 import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
-
-# setup django environment
 import django
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
 django.setup()
 
-# Import your models for use in your script
-from db.models import *
+from db.models import Product
 
-############################################################################
-## START OF APPLICATION
-############################################################################
-""" Replace the code below with your own """
+# adding all of the products we set already
+Product.objects.all().delete()
+Product.objects.create(upc="1001", name="Milk", price=2.99)
+Product.objects.create(upc="1002", name="Mango", price=1.99)
+Product.objects.create(upc="1003", name="Cookies", price=3.49)
+Product.objects.create(upc="1004", name="Shampoo", price=4.99)
+Product.objects.create(upc="1005", name="Carrot", price=1.49)
 
-# Seed a few users in the database
-User.objects.create(name='Dan')
-User.objects.create(name='Robert')
+print("Available products:")
+for p in Product.objects.all():
+    print(p.upc, p.name, p.price)
 
-for u in User.objects.all():
-    print(f'ID: {u.id} \tUsername: {u.name}')
+while True:
+    upc = input("Enter product UPC (or type 'done' to finish): ").strip()
+    if upc.lower() == "done":
+        print("Done.")
+        break
+    try:
+        product = Product.objects.get(upc=upc)
+        print("Product:", product.name)
+        print("Price: $", product.price)
+    except Product.DoesNotExist:
+        print("Product not found, please try again.")

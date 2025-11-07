@@ -1,101 +1,64 @@
-Django ORM Standalone
-=====================
+Assignment 3 – Django ORM Cash Register
+=======================================
+## Group 14
+Hibba Khan, Leona Krasniqi, and Tanzina Eusra
+## Overview
 
-![Django](https://img.shields.io/badge/Django_ORM-Standalone-blue)
-![Python](https://img.shields.io/badge/Python-yellow)
+The assignment part 1 implements a simple Cash Register application, and it uses the Django ORM framework. It will populate a database with product UPC codes, names, and prices. Scan a product by entering its UPC and display the name and price. Then, exit the program when the user types 'done'. The key files and folders are below.
 
-Use the database components of Django without having to use the rest of Django (i.e. running a web server)! :tada: A typical use case for using this template would be if you are writing a python script and you would like the database functionality provided by Django, but have no need for the request/response functionalty of a client/server web application that Django also provides. 
-
-With this project template you can write regular python scripts and use Django's excellent ORM functionality with the database backend of your choice. This makes it convienient for Djangonauts to write database driven python applications with the familiar and well polished Django ORM. Enjoy.
-
-:gear: Requirements
--------------------
-- Last tested successfully with Python 3.10.4 and Django 5.0.6
-- Create venv and pip install django to import the required modules.
-
-:open_file_folder: File Structure
----------------------------------
 ```
-django-orm/
-├── db/
-│   ├── __init__.py
-│   └── models.py
-├── main.py
-├── manage.py
-├── README.md
-└── settings.py
-```
-
-__The main.py file is the entry point for the project, and where you start your code. You automatically get access to your models via ```from db.models import *```
-Think of it like a plain old python file, but now with the addition of Django's feature-rich models.__ :smiling_face_with_three_hearts:
-
-__The db/models.py is where you configure your typical Django models.__ There is a toy user model included as a simple example. After running the migrations command in the quick setup below, a db.sqlite3 file will be generated. The settings.py file is where can swap out the sqlite3 database for another database connection, such as Postgres or AmazonRDS, if you wish. For most applications, sqlite3 will be powerful enough. But if you need to swap databases down the road, you can easily do so, which is one of the benefits of using the Django ORM. 
-
-:rocket: Quick Setup
---------------------
-Create a folder for your project on your local machine
-```
-mkdir myproject; cd myproject
-```
-Create a virtual environment and install django
-```
-python -m venv venv; source venv/bin/activate; pip install django
-```
-Download this project template from GitHub
-```
-git clone git@github.com:dancaron/Django-ORM.git; cd Django-ORM
-```
-Initialize the database
-```
-python manage.py makemigrations db; python manage.py migrate
-```
-Run the project
-```
-python main.py
+Django-ORM/
+│
+├── db/                     # This has the Django app files
+│   ├── migrations/         # these are the automatically created migration files when we migrated
+│   ├── screenshots/        # these are the screenshots showing setup and execution steps
+│   │   ├── Step 1.png
+│   │   ├── Step 2.png
+│   │   ├── Step 3.png
+│   │   └── Step 4.png
+│   ├── __init__.py         # this is what initializes the db module
+│   └── models.py           # this defines the Product model (UPC, name, price)
+│
+├── main.py                 # this is the main code that populates and scans the database
+├── manage.py               # this is the Django management for migrations
+├── settings.py             # this is the Django configuration file
+├── db.sqlite3              # this is the SQLite database file that was created after migration
+└── README.md               # The current file that outlines the assignment and steps
 ```
 
-Feel free to send pull requests if you want to improve this project.
+## Step 1:
 
-:crystal_ball: Example
-----------------------
-After running Quick Start above: 
+Creating and activating the virtual environment before running the Django ORM commands. When the environment is active we can see the (venv) before the prompt. You will have to make sure that you have django and pip installed. Run these commands in the terminal, we used VS code.
 
-Code in db/models.py:
-```
-# Sample User model
-class User(models.Model):
-    name = models.CharField(max_length=50, default='Dan')
+![Step 1 Screenshot](https://github.com/OTUSOFE365025/assignment-3-django-and-energy-group-14/blob/master/screenshots/Step%201.png?raw=true)
 
-    def __str__(self):
-        return self.name
-```
-Code in main.py:
-```
-# Seed a few users in the database
-User.objects.create(name='Dan')
-User.objects.create(name='Robert')
+## Step 2:
 
-for u in User.objects.all():
-    print(f'ID: {u.id} \tUsername: {u.name}')
-```
-Output from command: ```python main.py```
-```
-ID: 1	Username: Dan
-ID: 2	Username: Robert
-```
+Running Database Migrations to build the database structure. You need to run these commands to create the tables for the project, and the last message shows that the database is created.
 
-:mortar_board: Django Models
-----------------------------
+![Step 2 Screenshot](https://github.com/OTUSOFE365025/assignment-3-django-and-energy-group-14/blob/master/screenshots/Step%202.png?raw=true)
 
-Link: [How to Use Django Models](https://docs.djangoproject.com/en/3.1/topics/db/models/)
+## Step 3:
 
-License
--------
+Now you can start the program using the command below, it will automatically populate the database with sample products. It will show a list of items with the UPC codes, names and their prices.
 
-The MIT License (MIT) Copyright (c) 2024 Dan Caron
+![Step 3 Screenshot](https://github.com/OTUSOFE365025/assignment-3-django-and-energy-group-14/blob/master/screenshots/Step%203.png?raw=true)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+## Step 4:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+Scanning the products using their UPC is simple. Once prompted to enter the UPC, enter a product UPC from the list, you can keep entering the UPCs until you want to finish to exit the system. The following shows this demonstrated:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+![Step 4 Screenshot](https://github.com/OTUSOFE365025/assignment-3-django-and-energy-group-14/blob/master/screenshots/Step%204.png?raw=true)
+
+## How It Works
+- When main.py runs, it checks if the product database is empty
+- If it is empty, then it is then the program adds five sample products.
+- Then it shows all the added and now available products. 
+- You can enter a UPC to view the product name and price.
+- Typing "done" ends the program and closes it.
+
+## Technologies we used
+- Python as the main programming language
+- Django ORM to handle the database operations
+- SQLite as the database 
+- Visual Studio Code as the coding environment 
